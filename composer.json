@@ -1,0 +1,32 @@
+{
+	"name" : "ntlab/ntjs-laravel",
+	"type" : "library",
+	"description" : "PHP Javascript Repository Laravel integration",
+	"keywords" : [
+		"ntjs",
+		"javascript",
+		"repository",
+		"laravel"
+	],
+	"homepage" : "https://github.com/tohenk/php-ntjs-laravel",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Toha",
+			"email" : "tohenk@yahoo.com",
+			"role" : "Developer"
+		}
+	],
+	"require" : {
+		"php" : ">=7.1",
+		"ntlab/ntjs": "^2.0"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "^9.5",
+		"laravel/framework": "^9.15"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"NTLAB\\JS\\Laravel\\" : "src/"
+		}
+	}
+}
