@@ -28,5 +28,12 @@
 		"psr-4" : {
 			"NTLAB\\JS\\Laravel\\" : "src/"
 		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"NTLAB\\JS\\Laravel\\Provider"
+			]
+		}
 	}
 }
