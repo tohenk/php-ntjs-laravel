@@ -65,29 +65,17 @@ class Provider extends ServiceProvider
         $factoryClass = Factory::class;
         Blade::directive('css', function($expression) use ($factoryClass) {
             return <<<EOF
-<?php
-\$app = app();
-\$factory = \$app->make('$factoryClass');
-\$factory->useStylesheet($expression);
-?>
+<?php app()->make('$factoryClass')->useStylesheet($expression); ?>
 EOF;
         });
         Blade::directive('js', function($expression) use ($factoryClass) {
             return <<<EOF
-<?php
-\$app = app();
-\$factory = \$app->make('$factoryClass');
-\$factory->useJavascript($expression);
-?>
+<?php app()->make('$factoryClass')->useJavascript($expression); ?>
 EOF;
         });
         Blade::directive('ntjs', function($expression) use ($factoryClass) {
             return <<<EOF
-<?php
-\$app = app();
-\$factory = \$app->make('$factoryClass');
-\$factory->useScript($expression);
-?>
+<?php app()->make('$factoryClass')->useScript($expression); ?>
 EOF;
         });
         // https://github.com/alexdover/blade-set

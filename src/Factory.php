@@ -97,9 +97,28 @@ class Factory extends Base implements DependencyResolverInterface
             $manager->parseCdn(json_decode(file_get_contents($manager->getCdnInfoFile()), true));
         }
         // initialize Bootstrap
+        // @todo: move it somewhere
         Script::create('JQuery')
             ->includeDependency(['Bootstrap', 'BootstrapIcons'])
             ->includeScript();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \NTLAB\JS\Backend::trans()
+     */
+    public function trans($text, $vars = [], $domain = null)
+    {
+        return __($text, $vars);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \NTLAB\JS\Backend::url()
+     */
+    public function url($url, $options = [])
+    {
+        return route($url, $options);
     }
 
     /**
@@ -141,7 +160,7 @@ class Factory extends Base implements DependencyResolverInterface
         if ($repo = $asset->getRepository()) {
             $dir = $this->addSlash($dir, '/'.$repo);
         }
-        if (strlen($assetDir = $asset->getDirName($type))) {
+        if (strlen($assetDir = (string) $asset->getDirName($type))) {
             $dir = $this->addSlash($dir, '/'.$assetDir);
         }
         return $this->addSlash($dir, '/'.$name);
