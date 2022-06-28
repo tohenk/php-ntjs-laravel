@@ -31,6 +31,7 @@ use NTLAB\JS\DependencyResolverInterface;
 use NTLAB\JS\Manager;
 use NTLAB\JS\Script;
 use NTLAB\JS\Util\Asset;
+use NTLAB\JS\Util\Loader;
 
 use Illuminate\Http\Request;
 
@@ -40,6 +41,11 @@ class Factory extends Base implements DependencyResolverInterface
      * @var Request
      */
     protected $request;
+
+    /**
+     * @var Loader
+     */
+    protected $loader;
 
     /**
      * @var bool
@@ -78,6 +84,7 @@ class Factory extends Base implements DependencyResolverInterface
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->loader = new Loader();
         $this->initialize();
     }
 
@@ -251,5 +258,16 @@ class Factory extends Base implements DependencyResolverInterface
         if ($content) {
             $script->add($content);
         }
+    }
+
+    public function getScriptAutoload()
+    {
+        foreach ($this->getStylesheets() as $css) {
+            $this->loader->addStylesheet($css);
+        }
+        foreach ($this->getJavascripts() as $js) {
+            $this->loader->addJavascript($js);
+        }
+        return $this->loader->autoload();
     }
 }
